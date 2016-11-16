@@ -18,9 +18,9 @@
 (function( $ ) {
     //实时验证表单输入（自动）
     $.fn.watch = function(){
-        this.on('keyup', '.required, .number, .int, .mobile, .fn-validate', function(){
+        this.find('.required, .number, .int, .mobile, .fn-validate').on('change keyup', function () {
             doValidate($(this));
-        });
+        })
     }
 
     //验证指定输入控件
