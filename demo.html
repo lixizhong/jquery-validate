@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="jquery-1.12.4.min.js"></script>
+    <script src="validate.js"></script>
+    <link rel="stylesheet" href="bootstrap-3.3.5-dist/css/bootstrap.min.css">
+    <script src="bootstrap-3.3.5-dist/js/bootstrap.min.js"></script>
+</head>
+<body>
+<div style="margin:20px; padding:20px;">
+<form id="form">
+    姓名：<input name="name" type="text" class="required" /> <br /><br />
+    年龄：<input name="age" type="text" class="required int" /> <br /><br />
+    成绩：<input name="score" type="text" class="required number fn-validate" validate-fn="checkScore" /> <br /><br />
+    手机：<input name="mobile" type="text" class="required mobile" /> <br /><br />
+    性别：<input name="sex" type="text" class="required fn-validate" validate-fn="checkSex" /> <br /><br />
+    <input type="button" onclick="onSubmit()" value="提交" />
+</form>
+</div>
+
+<script>
+    $('#form').watch();
+
+    function checkSex(input){
+        var sex = input.val();
+        if(sex != '男' && sex != '女') {
+            return {result:false, message:'性别只能是男或者女'};
+        }
+        return {result:true};
+    }
+
+    function checkScore(input){
+        var score = input.val();
+        if(score != parseFloat(score)) {
+            return {result:false, message: '成绩必须是个数字'};
+        }
+        if(score < 0) {
+            return {result:false, message: '成绩不能是负数'};
+        }
+
+        return {result:true};
+    }
+
+    function onSubmit(){
+        if( ! $('#form').validate()) {
+            return false;
+        }
+
+        return false;
+    }
+</script>
+</body>
+</html>
